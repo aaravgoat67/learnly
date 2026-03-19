@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnova — Solve Doubts Instantly</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #02010a;
+  --deep: #06021a;
+  --nebula: #0d0526;
+  --star: #ffffff;
+  --nova: #c8f135;
+  --nova-dim: rgba(200,241,53,.12);
+  --nova-glow: rgba(200,241,53,.35);
+  --plasma: #7c3aed;
+  --plasma-dim: rgba(124,58,237,.15);
+  --aurora: #06d6b0;
+  --aurora-dim: rgba(6,214,176,.12);
+  --comet: #f472b6;
+  --text: #e8e4f5;
+  --muted: rgba(232,228,245,.45);
+  --border: rgba(255,255,255,.07);
+  --border-bright: rgba(200,241,53,.25);
+  --card: rgba(13,5,38,.7);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--void);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── GALAXY CANVAS ── */
+#galaxy-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, rgba(2,1,10,.95) 0%, transparent 100%);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+}
+
+.logo-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 20%, var(--nova));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-cta {
+  background: var(--nova);
+  color: var(--void);
+  border: none;
+  padding: 10px 22px;
+  border-radius: 99px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
+  text-decoration: none;
+}
+.nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 24px var(--nova-glow); }
+
+/* ── SECTIONS ── */
+section { position: relative; z-index: 1; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(200,241,53,.08);
+  border: 1px solid var(--border-bright);
+  border-radius: 99px;
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--nova);
+  letter-spacing: .04em;
+  margin-bottom: 36px;
+  animation: fadeUp .8s ease both;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--nova);
+  box-shadow: 0 0 8px var(--nova);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin-bottom: 28px;
+  animation: fadeUp .8s .1s ease both;
+}
+
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--nova) 0%, var(--aurora) 60%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: 48px;
+  font-weight: 300;
+  animation: fadeUp .8s .2s ease both;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp .8s .3s ease both;
+}
+
+.btn-primary {
+  background: var(--nova);
+  color: var(--void);
+  border: none;
+  padding: 16px 36px;
+  border-radius: 99px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: .2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.4), transparent 60%);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px var(--nova-glow); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 16px 32px;
+  border-radius: 99px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: .2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-secondary:hover { border-color: var(--border-bright); background: var(--nova-dim); }
+
+/* Orbit decoration */
+.hero-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(200,241,53,.06);
+  animation: spin linear infinite;
+  pointer-events: none;
+}
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* ── DOUBT FORM ── */
+.doubt-section {
+  padding: 0 24px 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.doubt-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 40px;
+  max-width: 680px;
+  width: 100%;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 40px 120px rgba(124,58,237,.15), 0 0 0 1px rgba(200,241,53,.06);
+  animation: fadeUp .8s .4s ease both;
+}
+
+.doubt-card-header {
+  margin-bottom: 30px;
+}
+
+.doubt-card-header h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.doubt-card-header p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.upload-zone {
+  border: 2px dashed rgba(200,241,53,.2);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.upload-zone:hover { border-color: var(--nova); background: var(--nova-dim); }
+.upload-zone-icon { font-size: 32px; margin-bottom: 8px; }
+.upload-zone-text { font-size: 14px; color: var(--muted); }
+.upload-zone-text strong { color: var(--nova); }
+#doubt-img-input { display: none; }
+#upload-preview { display: none; margin-bottom: 18px; border-radius: 12px; overflow: hidden; max-height: 200px; }
+#upload-preview img { width: 100%; height: 100%; object-fit: cover; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+.field-label { font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
+
+.inp {
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: .2s;
+  width: 100%;
+}
+.inp:focus { border-color: rgba(200,241,53,.4); background: rgba(200,241,53,.04); }
+.inp option { background: var(--deep); }
+
+textarea.inp { resize: vertical; min-height: 90px; line-height: 1.5; }
+
+.toggles-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  margin-top: 4px;
+}
+
+.toggle-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: .2s;
+  user-select: none;
+}
+.toggle-pill.on { background: var(--nova-dim); border-color: var(--border-bright); color: var(--nova); }
+.toggle-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: .2s; }
+.toggle-pill.on .dot { background: var(--nova); box-shadow: 0 0 6px var(--nova); }
+
+.submit-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(37,211,102,.1);
+  border: 1px solid rgba(37,211,102,.3);
+  color: #25D366;
+  border-radius: 99px;
+  padding: 14px 22px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
+  text-decoration: none;
+}
+.btn-wa:hover { background: rgba(37,211,102,.2); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  padding: 0 24px 80px;
+  display: flex;
+  justify-content: center;
+}
+.stats-inner {
+  display: flex;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 700px;
+  width: 100%;
+  backdrop-filter: blur(20px);
+}
+.stat-item {
+  flex: 1;
+  padding: 28px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--nova), var(--aurora));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* ── FEATURES ── */
+.features {
+  padding: 0 24px 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--nova);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 60px;
+  letter-spacing: -.01em;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 36px;
+  backdrop-filter: blur(20px);
+  transition: .3s;
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--nova-glow), transparent);
+  opacity: 0;
+  transition: .3s;
+}
+.feature-card:hover { border-color: rgba(200,241,53,.15); transform: translateY(-4px); }
+.feature-card:hover::before { opacity: 1; }
+
+.feature-icon {
+  font-size: 36px;
+  margin-bottom: 18px;
+  display: block;
+}
+
+.feature-tag {
+  display: inline-block;
+  background: var(--nova-dim);
+  border: 1px solid var(--border-bright);
+  border-radius: 99px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--nova);
+  letter-spacing: .04em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.feature-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── HOW IT WORKS ── */
+.how {
+  padding: 0 24px 100px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 56px;
+  bottom: 56px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--nova-glow), var(--aurora-dim), transparent);
+}
+
+.step {
+  display: flex;
+  gap: 28px;
+  align-items: start;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+}
+.step:last-child { border-bottom: none; }
+
+.step-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--nova-dim);
+  border: 1px solid var(--border-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--nova);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.step-content h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.step-content p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── SAMPLE DOUBT ── */
+.proof {
+  padding: 0 24px 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.proof-inner {
+  max-width: 760px;
+  width: 100%;
+}
+
+.proof-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+}
+
+.proof-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.proof-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.doubt-bubble {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.bubble-av {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.bubble-body {
+  border-radius: 4px 16px 16px 16px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 85%;
+}
+
+.bubble-student .bubble-av { background: rgba(255,255,255,.06); }
+.bubble-student .bubble-body { background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--text); }
+.bubble-student .bubble-body .who { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+
+.bubble-nova .bubble-av { background: linear-gradient(135deg, var(--nova), var(--aurora)); }
+.bubble-nova .bubble-body { background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.15); border-radius: 16px 4px 16px 16px; }
+.bubble-nova .bubble-body .who { font-size: 11px; color: var(--nova); margin-bottom: 4px; font-weight: 700; }
+
+.tick-row { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 11px; color: var(--nova); }
+
+/* Testimonial */
+.testimonial {
+  margin-top: 28px;
+  background: rgba(124,58,237,.08);
+  border: 1px solid rgba(124,58,237,.2);
+  border-radius: 16px;
+  padding: 20px 24px;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+}
+.testimonial .who { margin-top: 10px; font-style: normal; font-size: 13px; color: var(--muted); }
+
+/* ── CTA ── */
+.final-cta {
+  padding: 80px 24px 120px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.cta-glow {
+  position: absolute;
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(200,241,53,.08), transparent 70%);
+  top: 0; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.final-cta h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 6vw, 68px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -.02em;
+}
+
+.final-cta p { font-size: 18px; color: var(--muted); margin-bottom: 40px; max-width: 480px; font-weight: 300; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  color: var(--muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .stats-inner { flex-direction: column; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; }
+  footer { flex-direction: column; align-items: flex-start; }
+  .doubt-card { padding: 24px; }
+  .feature-card { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="galaxy-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg class="logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="19" cy="19" r="19" fill="#06021a"/>
+      <!-- Outer ring -->
+      <ellipse cx="19" cy="19" rx="17" ry="6" stroke="#c8f135" stroke-width="1" stroke-opacity=".5" transform="rotate(-20 19 19)" fill="none"/>
+      <!-- Planet body -->
+      <circle cx="19" cy="19" r="9" fill="url(#planet-grad)"/>
+      <!-- Star dots -->
+      <circle cx="8" cy="10" r="1" fill="#c8f135" opacity=".8"/>
+      <circle cx="31" cy="8" r=".7" fill="#06d6b0" opacity=".9"/>
+      <circle cx="6" cy="28" r=".6" fill="#fff" opacity=".7"/>
+      <circle cx="33" cy="26" r="1" fill="#c8f135" opacity=".6"/>
+      <!-- N letter on planet -->
+      <text x="14.5" y="23.5" font-family="Arial Black" font-size="10" font-weight="900" fill="#02010a">N</text>
+      <defs>
+        <radialGradient id="planet-grad" cx="35%" cy="30%">
+          <stop offset="0%" stop-color="#c8f135"/>
+          <stop offset="60%" stop-color="#06d6b0"/>
+          <stop offset="100%" stop-color="#0d0526"/>
+        </radialGradient>
+      </defs>
+    </svg>
+    <span class="logo-name">Learnova</span>
+  </a>
+  <a href="#ask" class="nav-cta">Ask a Doubt →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Orbit rings decoration -->
+  <div class="hero-orbit" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(0deg);animation-duration:60s;"></div>
+  <div class="hero-orbit" style="width:900px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);animation-duration:90s;border-color:rgba(6,214,176,.04);"></div>
+
+  <div class="hero-badge">⚡ Live now — instant doubt solving</div>
+
+  <h1>
+    Stuck on a doubt?<br>
+    <span class="accent">Get it solved instantly.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Learnova supports students beyond classroom learning by helping them solve doubts instantly — any subject, any time, no judgment.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#ask" class="btn-primary">🙋 Ask Your Doubt Now</a>
+    <a href="#how" class="btn-secondary">See how it works →</a>
+  </div>
+</section>
+
+<!-- ASK DOUBT FORM -->
+<section class="doubt-section" id="ask">
+  <div class="doubt-card">
+    <div class="doubt-card-header">
+      <h2>⚡ Ask Your Doubt</h2>
+      <p>Type it or snap a photo — we'll solve it fast.</p>
+    </div>
+
+    <!-- Image upload -->
+    <div class="upload-zone" onclick="document.getElementById('doubt-img-input').click()" id="upload-zone"
+      ondragover="event.preventDefault();this.style.borderColor='var(--nova)'"
+      ondragleave="this.style.borderColor='rgba(200,241,53,.2)'"
+      ondrop="handleImgDrop(event)">
+      <div class="upload-zone-icon">📸</div>
+      <div class="upload-zone-text"><strong>Snap & Solve</strong> — drag your photo here or click to upload</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px;">JPG, PNG · Textbook page, question paper, diagram</div>
+    </div>
+    <div id="upload-preview"><img id="preview-img" src="" alt="preview"></div>
+    <input type="file" id="doubt-img-input" accept="image/*" onchange="previewImg(this)">
+
+    <!-- Or type -->
+    <div class="field-group" style="margin-bottom:14px;">
+      <label class="field-label">Or type your doubt</label>
+      <textarea class="inp" id="doubt-text" placeholder="e.g. Why does current lag behind voltage in an inductor? I don't understand this at all…"></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="field-group">
+        <label class="field-label">Subject</label>
+        <select class="inp" id="doubt-subject">
+          <option>Mathematics</option>
+          <option>Physics</option>
+          <option>Chemistry</option>
+          <option>Biology</option>
+          <option>Science</option>
+          <option>English</option>
+          <option>History</option>
+          <option>Geography</option>
+          <option>Computer Science</option>
+          <option>Economics</option>
+          <option>Political Science</option>
+          <option>Sanskrit</option>
+          <option>Hindi</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Class</label>
+        <select class="inp" id="doubt-class">
+          <option>Class 6</option>
+          <option>Class 7</option>
+          <option>Class 8</option>
+          <option>Class 9</option>
+          <option>Class 10</option>
+          <option>Class 11</option>
+          <option>Class 12</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Toggles -->
+    <div class="toggles-row">
+      <div class="toggle-pill on" id="toggle-anon" onclick="togglePill(this)">
+        <div class="dot"></div>
+        🕵️ Ask anonymously
+      </div>
+      <div class="toggle-pill" id="toggle-eli5" onclick="togglePill(this)">
+        <div class="dot"></div>
+        😄 Explain like I'm 5
+      </div>
+      <div class="toggle-pill" id="toggle-exam" onclick="togglePill(this)">
+        <div class="dot"></div>
+        📝 Exam tip mode
+      </div>
+    </div>
+
+    <div class="submit-row">
+      <button class="btn-primary" style="font-size:15px;padding:14px 28px;" onclick="submitDoubt()">
+        🚀 Submit Doubt
+      </button>
+      <a class="btn-wa" onclick="sendToWhatsApp()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Ask on WhatsApp
+      </a>
+    </div>
+
+    <!-- Confirmation message (hidden) -->
+    <div id="submit-confirm" style="display:none;margin-top:20px;background:var(--nova-dim);border:1px solid var(--border-bright);border-radius:16px;padding:16px 20px;font-size:14px;color:var(--nova);">
+      ✅ <strong>Doubt received!</strong> Your teacher will answer within minutes. Check the Learnova app for the reply.
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar reveal">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-lbl">Doubts Solved</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">&lt;5 min</div>
+      <div class="stat-lbl">Avg. Response Time</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">14</div>
+      <div class="stat-lbl">Subjects Covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-lbl">Free to Use</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features reveal" id="features">
+  <div class="section-label">Why Learnova</div>
+  <h2 class="section-title">Not another ERP.<br><span style="color:var(--nova)">A real-time doubt solver.</span></h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📸</span>
+      <span class="feature-tag">Snap & Solve</span>
+      <h3>Click a photo, get step-by-step help</h3>
+      <p>Can't describe your doubt in words? Just snap your textbook, question paper, or diagram. Learnova reads it and gets you a clear explanation.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🧾</span>
+      <span class="feature-tag">Concept Clarity</span>
+      <h3>Not just answers — real understanding</h3>
+      <p>We don't just solve the problem. We explain the concept behind it so next time, you get it yourself. Turn confusion into confidence.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🕵️</span>
+      <span class="feature-tag">Ask Freely</span>
+      <h3>No judgment. Ask anonymously.</h3>
+      <p>Afraid to ask in class? Ask anonymously on Learnova. Your name stays hidden — only the doubt matters. Every question deserves an answer.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <span class="feature-tag">Fast Replies</span>
+      <h3>Rescue during panic moments</h3>
+      <p>Right before a test, you won't open ERP. You'll open Learnova. We respond within minutes — exactly when you need it most.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how reveal" id="how">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">3 steps to clarity</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Upload your doubt</h3>
+        <p>Type your question or snap a photo of your textbook/question paper. Choose your subject and class. Toggle anonymous if you want — it's on by default.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Get your solution</h3>
+        <p>Your teacher receives it instantly and answers within minutes. You get a notification. No waiting till the next day. No awkward hand-raising in class.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Understand the concept</h3>
+        <p>It's not just the answer — it's the explanation. Read it, save it, share it with your class. That's how you actually learn, not just pass.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE DOUBT PROOF -->
+<section class="proof reveal">
+  <div class="proof-inner">
+    <div class="proof-card">
+      <div class="proof-label">💬 Real doubt, real answer</div>
+
+      <div class="doubt-bubble bubble-student">
+        <div class="bubble-av">🕵️</div>
+        <div class="bubble-body">
+          <div class="who">Anonymous · Physics · Class 11</div>
+          Why does current lag behind voltage in an inductor? I've read it 3 times and still don't get it 😭
+        </div>
+      </div>
+
+      <div class="doubt-bubble bubble-nova" style="flex-direction:row-reverse;">
+        <div class="bubble-av">🤖</div>
+        <div class="bubble-body" style="border-radius:16px 4px 16px 16px;">
+          <div class="who">Nova AI · Answered in 2 min</div>
+          Think of it like a flywheel 🎡<br><br>
+          When you push a flywheel (apply voltage), it doesn't spin instantly — it takes time to build momentum. An inductor is the same — it resists changes in current. So when voltage is applied, current builds up slowly behind it. That "lag" is 90° in a perfect inductor.<br><br>
+          Key takeaway: <strong style="color:var(--nova)">Voltage leads, current follows.</strong> ELI = ICE 😄
+          <div class="tick-row">✅ Seen by teacher &nbsp;·&nbsp; ✅ Answered</div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        "I used to wait till next day to get doubts cleared. Now I get them solved within minutes — even at 11pm before my exam. It's literally changed how I study."
+        <div class="who">— Arjun S., Class 11, Mumbai 🏆 topped Physics unit test</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta reveal">
+  <div class="cta-glow"></div>
+  <div class="section-label">Get Started</div>
+  <h2>Your rescue before<br>every exam. <span style="color:var(--nova)">🚀</span></h2>
+  <p>Students don't need another platform. They need rescue during panic moments. That's Learnova.</p>
+  <div class="hero-btns">
+    <a href="#ask" class="btn-primary" style="font-size:16px;padding:18px 40px;">🙋 Ask Your First Doubt — It's Free</a>
+  </div>
+  <div style="margin-top:20px;font-size:13px;color:var(--muted);">No signup needed · Anonymous by default · Instant response</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <svg width="24" height="24" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="19" fill="#06021a"/><ellipse cx="19" cy="19" rx="17" ry="6" stroke="#c8f135" stroke-width="1" stroke-opacity=".5" transform="rotate(-20 19 19)" fill="none"/><circle cx="19" cy="19" r="9" fill="url(#planet-grad2)"/><text x="14.5" y="23.5" font-family="Arial Black" font-size="10" font-weight="900" fill="#02010a">N</text><defs><radialGradient id="planet-grad2" cx="35%" cy="30%"><stop offset="0%" stop-color="#c8f135"/><stop offset="60%" stop-color="#06d6b0"/><stop offset="100%" stop-color="#0d0526"/></radialGradient></defs></svg>
+    <span style="font-family:'Syne',sans-serif;font-weight:700;color:var(--text);">Learnova</span>
+  </div>
+  <div style="font-size:12px;">Built by <strong style="color:var(--nova);">Aarav Kudva</strong> · 6th Grade, HFS 🏸</div>
+  <div style="font-size:12px;">© 2025 Learnova · Beyond classroom learning</div>
+</footer>
+
+<script>
+/* ── GALAXY CANVAS ── */
+const canvas = document.getElementById('galaxy-canvas');
+const ctx = canvas.getContext('2d');
+let stars = [], nebulae = [], shootingStars = [];
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function initGalaxy(){
+  stars = [];
+  nebulae = [];
+  // Stars
+  for(let i=0;i<280;i++){
+    stars.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*1.6+.2,
+      a: Math.random(),
+      twinkleSpeed: .005+Math.random()*.015,
+      twinkleDir: Math.random()>.5?1:-1,
+      color: ['#ffffff','#c8f135','#06d6b0','#a78bfa'][Math.floor(Math.random()*4)]
+    });
+  }
+  // Nebula clouds
+  for(let i=0;i<5;i++){
+    nebulae.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      rx: 120+Math.random()*200,
+      ry: 80+Math.random()*120,
+      color: ['rgba(124,58,237,','rgba(200,241,53,','rgba(6,214,176,','rgba(244,114,182,'][Math.floor(Math.random()*4)],
+      a: .03+Math.random()*.05
+    });
+  }
+}
+
+function spawnShootingStar(){
+  shootingStars.push({
+    x: Math.random()*canvas.width*1.2,
+    y: Math.random()*canvas.height*.5,
+    len: 80+Math.random()*120,
+    speed: 8+Math.random()*10,
+    a: 1,
+    angle: Math.PI/6+Math.random()*.3
+  });
+}
+
+function drawGalaxy(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // Background gradient
+  const bg = ctx.createRadialGradient(canvas.width*.5,canvas.height*.3,0,canvas.width*.5,canvas.height*.5,canvas.width*.8);
+  bg.addColorStop(0,'#06021a');
+  bg.addColorStop(.5,'#02010a');
+  bg.addColorStop(1,'#000008');
+  ctx.fillStyle=bg;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // Nebulae
+  nebulae.forEach(n=>{
+    const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,Math.max(n.rx,n.ry));
+    g.addColorStop(0,n.color+n.a+')');
+    g.addColorStop(1,n.color+'0)');
+    ctx.save();
+    ctx.scale(n.rx/Math.max(n.rx,n.ry),n.ry/Math.max(n.rx,n.ry));
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    const scale=Math.max(n.rx,n.ry);
+    ctx.arc(n.x*(Math.max(n.rx,n.ry)/n.rx),n.y*(Math.max(n.rx,n.ry)/n.ry),scale,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // Stars
+  stars.forEach(s=>{
+    s.a+=s.twinkleSpeed*s.twinkleDir;
+    if(s.a>1||s.a<.1) s.twinkleDir*=-1;
+    ctx.globalAlpha=s.a;
+    ctx.fillStyle=s.color;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    if(s.r>1){
+      ctx.globalAlpha=s.a*.3;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r*3,0,Math.PI*2);
+      ctx.fill();
+    }
+  });
+
+  // Shooting stars
+  shootingStars.forEach((ss,i)=>{
+    ctx.globalAlpha=ss.a;
+    const g=ctx.createLinearGradient(ss.x,ss.y,ss.x-Math.cos(ss.angle)*ss.len,ss.y+Math.sin(ss.angle)*ss.len);
+    g.addColorStop(0,'rgba(200,241,53,0.9)');
+    g.addColorStop(1,'rgba(200,241,53,0)');
+    ctx.strokeStyle=g;
+    ctx.lineWidth=1.5;
+    ctx.beginPath();
+    ctx.moveTo(ss.x,ss.y);
+    ctx.lineTo(ss.x-Math.cos(ss.angle)*ss.len,ss.y+Math.sin(ss.angle)*ss.len);
+    ctx.stroke();
+    ss.x+=Math.cos(ss.angle)*ss.speed;
+    ss.y+=Math.sin(ss.angle)*ss.speed;
+    ss.a-=.02;
+    if(ss.a<=0) shootingStars.splice(i,1);
+  });
+
+  ctx.globalAlpha=1;
+  requestAnimationFrame(drawGalaxy);
+}
+
+resize();
+initGalaxy();
+drawGalaxy();
+window.addEventListener('resize',()=>{resize();initGalaxy();});
+setInterval(spawnShootingStar,3500);
+setTimeout(spawnShootingStar,800);
+
+/* ── SCROLL REVEAL ── */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* ── UPLOAD ── */
+function previewImg(input){
+  if(!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    document.getElementById('preview-img').src=e.target.result;
+    document.getElementById('upload-preview').style.display='block';
+    document.getElementById('upload-zone').style.display='none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function handleImgDrop(e){
+  e.preventDefault();
+  document.getElementById('doubt-img-input').files=e.dataTransfer.files;
+  previewImg(document.getElementById('doubt-img-input'));
+}
+
+/* ── TOGGLES ── */
+function togglePill(el){el.classList.toggle('on');}
+
+/* ── SUBMIT ── */
+function submitDoubt(){
+  const text=document.getElementById('doubt-text').value.trim();
+  const hasImg=document.getElementById('preview-img').src&&document.getElementById('preview-img').src!==location.href;
+  if(!text&&!hasImg){alert('Please type your doubt or upload a photo!');return;}
+  document.getElementById('submit-confirm').style.display='block';
+  document.getElementById('submit-confirm').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ── WHATSAPP ── */
+function sendToWhatsApp(){
+  const text=document.getElementById('doubt-text').value.trim();
+  const subject=document.getElementById('doubt-subject').value;
+  const cls=document.getElementById('doubt-class').value;
+  const anon=document.getElementById('toggle-anon').classList.contains('on');
+  const eli5=document.getElementById('toggle-eli5').classList.contains('on');
+  let msg='📚 *Learnova Doubt*\n';
+  msg+=`Subject: ${subject} · ${cls}\n`;
+  if(anon)msg+='👤 Anonymous\n';
+  if(eli5)msg+='😄 Explain like I\'m 5\n';
+  msg+='\n'+( text||'[Photo attached — check Learnova app]');
+  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>
